@@ -85,7 +85,7 @@ module Enumerable
     def my_map
         return self.dup unless block_given?
         arr =[]
-        to_a.my_each{|item| arr<< yield(item) }
+        to_a.my_each{ |item| arr<< yield(item) }
         arr
     end
     
