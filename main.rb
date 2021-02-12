@@ -6,6 +6,8 @@ require './enumerable.rb'
 
 #result = ['Sharon', 'Leo', 'Leila', 'Brian', 'Arun'].my_select {|friend| friend != 'Brian'}
 
-result = %w[ant bear cat].my_all? { |word|  word.length >= 4 }
+#result = %w[ant bear cat].my_all? { |word|  word.length >= 4 }
+
+result = %w[ant bear cat].any?(/d/) 
 
 puts result

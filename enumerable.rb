@@ -44,6 +44,14 @@ module Enumerable
         end
         result
     end
+
+    def my_any?
+        result = false
+        my_each { |item| result = true if yield(item) }
+        result
+    end
+
+
     
 end
 
