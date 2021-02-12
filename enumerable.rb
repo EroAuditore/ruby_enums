@@ -34,12 +34,21 @@ module Enumerable
         new_arr
     end
 
-    def my_all?
+    def my_all?(regex=nil)
         result = true
-        my_each do |item|
-            if !yield(item)
-                result = false
-                break
+        if  block_given?
+            my_each do |item|
+                if !yield(item)
+                    result = false
+                    break
+                end
+            end
+        elsif !regex.nil?
+            my_each do |item|
+                if  !regex.match(item)
+                    result = false
+                    break
+                end
             end
         end
         result

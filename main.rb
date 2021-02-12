@@ -7,8 +7,8 @@ require './enumerable.rb'
 #result = ['Sharon', 'Leo', 'Leila', 'Brian', 'Arun'].my_select {|friend| friend != 'Brian'}
 #result = %w[ant bear cat].my_any?(/d/)  
 
-#result = %w[ant bear cat].my_all?(/t/)                        #=> false
+result = %w[ant bear cat].my_all?(/t/)                        #=> false
 
-result = %w[ant bear cat].my_none?(/d/)                        #=> true
+#result = %w[ant bear cat].my_none?(/d/)                        #=> true
 
 puts result
