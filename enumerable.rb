@@ -39,8 +39,8 @@ module Enumerable
         my_each do |item|
             if !yield(item)
                 result = false
+                break
             end
-            break
         end
         result
     end
@@ -51,7 +51,16 @@ module Enumerable
         result
     end
 
-
+    def my_none?(regex=nil)
+        result = true
+        if block_given?
+            my_each { |item|  result = false if yield(item)} 
+        elsif  !regex.nil?
+            my_each { |item|  result = false if regex.match(item)} 
+        end
+        result
+    end
+    
     
 end
 
