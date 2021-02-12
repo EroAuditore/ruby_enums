@@ -12,8 +12,8 @@ require './enumerable.rb'
 
 #result = %w[ant bear cat].my_none?(/d/)                        #=> true
 
-ary = [1, 2, 4, 2, 4]
 
-result = ary.my_count 
+
+result = (1..5).my_map { |i| i * i }
 
 puts result

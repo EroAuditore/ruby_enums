@@ -81,6 +81,13 @@ module Enumerable
         end
         count
     end
+
+    def my_map
+        return self.dup unless block_given?
+        arr =[]
+        to_a.my_each{|item| arr<< yield(item) }
+        arr
+    end
     
 end
 
