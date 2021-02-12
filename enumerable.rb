@@ -70,6 +70,17 @@ module Enumerable
         result
     end
     
+    def my_count(num=nil)
+        count = 0
+        if block_given?
+            my_each { |item|  count +=1 if yield(item)} 
+        elsif  !num.nil?
+            my_each { |item|  count +=1 if num==item} 
+        elsif num.nil? && !block_given?
+            my_each { |item|  count +=1 }
+        end
+        count
+    end
     
 end
 
