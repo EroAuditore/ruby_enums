@@ -1,10 +1,10 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Project 1: Ruby Bubble Sort
+# Project : Advanced building blocks
 
-> This project is the first ruby project for sorting array elements
+> This project is implementing my own version of Ruby’s enumerable methods
 
-![Screenshot from 2021-02-10](https://user-images.githubusercontent.com/60273425/107563541-d065ae80-6ba6-11eb-9130-eebf768cace2.PNG)
+![Screenshot from 2021-02-15](https://user-images.githubusercontent.com/60273425/108003036-ffb95880-6fb6-11eb-8a68-519eac9dd36d.PNG)
 
 ## Built With
 
