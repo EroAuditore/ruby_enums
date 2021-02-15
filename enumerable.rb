@@ -82,29 +82,55 @@ module Enumerable
         count
     end
 
-    def my_map
-        return self.dup unless block_given?
+    def my_map(proc = nil)
+        return self.dup unless block_given? || proc
         arr =[]
-        to_a.my_each{ |item| arr<< yield(item) }
+        if proc
+            puts "proc"
+            to_a.my_each{ |item| arr<< proc.call(item) }
+      
+        else
+            puts "yield"
+            to_a.my_each{ |item| arr<< yield(item) }
+        end
         arr
     end
 
     def my_inject(num=nil, sym=nil)
-        if block_given? 
-            puts "block given"
+        #Codeblock given 
+        if block_given? && num.nil? && sym.nil? 
+            #puts "block given"
             memo = num
             to_a.my_each {|item| memo = memo.nil? ? item : yield(memo, item)} 
             return memo
-
+        #symbol with array
         elsif !num.nil? && num.is_a?(Symbol)
-            puts "symbol"
+            #puts "symbol"
             sym=num
             to_a.my_each {|item| memo = num.send(sym, item)} 
             return memo
+        #Symbol with number
+        elsif !num.nil? && sym.is_a?(Symbol)
+            #puts "number and symbol"
+            to_a.my_each { |item| memo = memo.nil? ? item.send(sym, num) : memo.send(sym, item) }
+            return memo
+        #number and codeblock
+        elsif !num.nil? && block_given? && sym.nil?
+            #puts "Num & block_given"
+            to_a.my_each {|item| memo = memo.nil? ? yield(num, item) : yield(memo, item)}
+            return memo
+        
         end
+        
+
     end
+
+    
     
 end
 
+def multiply_els(arr)
+    arr.my_inject { |result, element| result * element }
+end
 
 # rubocop:enable Style/CaseEquality
