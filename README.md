@@ -12,12 +12,35 @@
 
 ## Getting Started
 
-> The proyect contains two files "bubble_sort.rb" and "bubble_sort_by.rb"
+> The proyect contains two files "enumerable.rb" and "main.rb"
 
 How ot use it:
 
-- bubble_sort.rb has a method #bubble_sort(arr_int) where arr_int is an array of integers and the method will return an a sorted array of integers and print the array in the screen
-- bubble_sort_by.rb has a method #bubble_sort_by(arr_str) where arr_str is an array of strings and the method will return an array of strings sorted by the length of the elements and print the array in the screen
+- main.rb is for testing enumerable methods
+- Import enumerable.rb in your project "require './enumerable' "
+
+Methods included:
+
+- my_each
+- my_each_with_index
+- my_select
+- my_all?
+- my_any?
+- my_none?
+- my_count
+- my_map
+- my_inject
+- multiply_els
+
+### Setup
+
+- Install [git](https://git-scm.com/downloads)
+- Open Terminal
+- Change directory to folder to download repository
+- Use `cd <file-path>`
+- Run `git clone https://github.com/EroAuditore/ruby_enums.git`
+- Install [Ruby](https://ruby-doc.org/downloads/)
+- Run `ruby main.rb`
 
 ## Dependencies
 
@@ -28,12 +51,7 @@ How ot use it:
 
 👤 **Eduardo Auditore**
 
-- GitHub: [@Rashad-Muntar](https://github.com/EroAuditore)
-
-👤 **Rashad Muntar**
-
-- GitHub: [@Rashad-Muntar](https://github.com/Rashad-Muntar)
-- Twitter: [@RashadToure](https://twitter.com/twitterhandle)
+- GitHub: [@EroAuditore](https://github.com/EroAuditore)
 
 ## 🤝 Contributing
 
