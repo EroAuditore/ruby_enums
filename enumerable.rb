@@ -88,10 +88,23 @@ module Enumerable
         to_a.my_each{ |item| arr<< yield(item) }
         arr
     end
+
+    def my_inject(num=nil, sym=nil)
+        if block_given? 
+            puts "block given"
+            memo = num
+            to_a.my_each {|item| memo = memo.nil? ? item : yield(memo, item)} 
+            return memo
+
+        elsif !num.nil? && num.is_a?(Symbol)
+            puts "symbol"
+            sym=num
+            to_a.my_each {|item| memo = num.send(sym, item)} 
+            return memo
+        end
+    end
     
 end
-
-
 
 
 # rubocop:enable Style/CaseEquality

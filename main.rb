@@ -12,8 +12,19 @@ require './enumerable.rb'
 
 #result = %w[ant bear cat].my_none?(/d/)                        #=> true
 
+#result = (1..5).my_map { |i| i * i }
 
+#result  = (5..10).my_inject do |product, n| 
+#    puts "N : #{n}  | product: #{product} "
+#    product * n 
+#end
 
-result = (1..5).my_map { |i| i * i }
+#result  = (5..10).inject(:*) 
+accumulator = 5
+sym = :+
+result = accumulator.send(sym, 3)
+
+result  = (5..10).my_inject(:*) 
+
 
 puts result
