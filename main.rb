@@ -13,13 +13,11 @@ require './enumerable.rb'
 
 #result = %w[ant bear cat].my_none?(/d/)                        #=> true
 
-result = (1..5).my_map { |i| i * i }
-puts "Map yield: " 
-puts result
+
 puts 'my_map proc'
 my_proc = proc { |i| i * i }
-[2, 5, 7, 4, 2].my_map(my_proc)
-puts my_proc
+result = [2, 5, 7, 4, 2].my_map(my_proc)
+puts result
 
 #result  = (5..10).my_inject do |product, n| 
 #    puts "N : #{n}  | product: #{product} "

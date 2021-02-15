@@ -86,11 +86,8 @@ module Enumerable
         return self.dup unless block_given? || proc
         arr =[]
         if proc
-            puts "proc"
-            to_a.my_each{ |item| arr<< proc.call(item) }
-      
+            to_a.my_each{ |item| arr << proc.call(item) }
         else
-            puts "yield"
             to_a.my_each{ |item| arr<< yield(item) }
         end
         arr
