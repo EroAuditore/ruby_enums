@@ -1,42 +1,47 @@
 require './enumerable.rb'
 
+puts "** My Each **"
+m_each = [3, 2, 3, 4, 5].my_each { |num| puts num }
+puts m_each
 
-#[3, 2, 3, 4, 5].my_each { |num| puts num }
+puts "** My Each index **"
+m_each_index = [3, 2, 3, 4, 5].my_each_with_index { |num, index| puts "Num #{num} with index #{index}" }
+puts m_each_index
 
-#[3, 2, 3, 4, 5].my_each_with_index { |num, index| puts "Num #{num} with index #{index}" }
+puts "** My select **"
+puts m_select = ['Sharon', 'Leo', 'Leila', 'Brian', 'Arun'].my_select {|friend| friend != 'Brian'}
+puts m_select
 
-#result = ['Sharon', 'Leo', 'Leila', 'Brian', 'Arun'].my_select {|friend| friend != 'Brian'}
+puts "** My any **"
 
-#result = %w[ant bear cat].my_any?(/d/)  
+m_any = %w[ant bear cat].my_any?(/b/)                   
+puts m_any
 
-#result = %w[ant bear cat].my_all?(/t/)                        #=> false
+puts "** My all **"
+m_all = %w[ant bear cat].my_all?(/t/)                        
+puts m_all
 
-#result = %w[ant bear cat].my_none?(/d/)                        #=> true
+puts "** My none **"
+m_none = %w[ant bear cat].my_none?(/d/)                        
+puts m_none
 
-
-puts 'my_map proc'
+puts "* My map *"
 my_proc = proc { |i| i * i }
-result = [2, 5, 7, 4, 2].my_map(my_proc)
-puts result
+m_map = [2, 5, 7, 4, 2].my_map(my_proc)
+puts m_map
 
-#result  = (5..10).my_inject do |product, n| 
-#    puts "N : #{n}  | product: #{product} "
-#    product * n 
-#end
+puts "My inject"
+m_inject_num  = (5..10).inject(:*) 
+puts m_inject_num
 
-#result  = (5..10).inject(:*) 
-accumulator = 5
-sym = :+
-result = accumulator.send(sym, 3)
 
-#result  = (5..10).my_inject(:*)
-#result = (5..10 ).my_inject(1, :*)  
-
-result = (5..10).my_inject(1) { |product, n|  product * n } #=> 151200
-
-longest = %w{ cat sheep sheepeta bear }.my_inject do |memo, word|
+puts "My inject strings"
+m_inject_str = %w{ cat sheep sheepeta bear }.my_inject do |memo, word|
     memo.length > word.length ? memo : word
  end
+puts m_inject_str
 
-#multply = multiply_els([2, 4, 5])
+puts "Multiply inject"
+multply = multiply_els([2, 4, 5])
+puts "Multiply"
 

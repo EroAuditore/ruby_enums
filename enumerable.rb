@@ -54,9 +54,23 @@ module Enumerable
         result
     end
 
-    def my_any?
+    def my_any?(regex=nil)
         result = false
-        my_each { |item| result = true if yield(item) }
+        if  block_given?
+            my_each do |item|
+                if yield(item)
+                    result = true
+                    break
+                end
+            end
+        elsif !regex.nil?
+            my_each do |item|
+                if  regex.match(item)
+                    result = true
+                    break
+                end
+            end
+        end
         result
     end
 
@@ -65,7 +79,7 @@ module Enumerable
         if block_given?
             my_each { |item|  result = false if yield(item)} 
         elsif  !regex.nil?
-            my_each { |item|  result = false if regex.match(item)} 
+            my_each { |item|  result = false if !regex.match(item)} 
         end
         result
     end
