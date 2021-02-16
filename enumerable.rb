@@ -1,18 +1,12 @@
+# rubocop: disable Metrics/ModuleLength
+# rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+
 module Enumerable
   def my_each
     return dup unless block_given?
 
     (0..length - 1).each do |i|
       yield to_a[i]
-    end
-    self
-  end
-
-  def my_each_with_index
-    return dup unless block_given?
-
-    (0..length - 1).each do |i|
-      yield to_a[i], i
     end
   end
 
@@ -133,6 +127,9 @@ module Enumerable
     end
   end
 end
+
+# rubocop: enable Metrics/ModuleLength
+# rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 
 def multiply_els(arr)
   arr.my_inject { |result, element| result * element }

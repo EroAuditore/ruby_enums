@@ -42,4 +42,4 @@ puts m_inject_str
 
 puts 'Multiply inject'
 multply = multiply_els([2, 4, 5])
-puts 'Multiply'
+puts multply
