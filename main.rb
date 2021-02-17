@@ -1,4 +1,5 @@
 require './enumerable'
+puts [nil, false, true, []].my_any?
 
 puts '** My Each **'
 [3, 2, 3, 4, 5].my_each { |num| puts num }
@@ -7,7 +8,6 @@ friends.my_each { |friend| puts "Hello, #{friend}" }
 
 puts '** My Each index **'
 [3, 2, 3, 4, 5].my_each_with_index { |num, index| puts "Num #{num} with index #{index}" }
-puts %i[hello world].each_with_index.to_h
 
 puts '** My select **'
 puts(%w[Sharon Leo Leila Brian Arun].my_select { |friend| friend != 'Brian' })

@@ -59,13 +59,16 @@ module Enumerable
   def my_any?(regex = nil)
     result = false
     if block_given?
+
       my_each do |item|
         if yield(item)
           result = true
           break
         end
       end
+
     elsif !regex.nil? && regex.instance_of?(Regexp)
+
       my_each do |item|
         if regex.match(item)
           result = true
@@ -73,11 +76,16 @@ module Enumerable
         end
       end
     elsif !regex.nil? && (regex.is_a? Class)
+
       to_a.my_each { |item| return true if [item.class, item.class.superclass].include?(regex) }
     elsif !block_given? && regex.nil?
-      to_a.my_each { |item| return true unless item }
+
+      to_a.my_each { |item| return true if item }
     elsif regex.is_a?(Class)
+
       to_a.my_each { |item| return true if item.is_a?(regex) }
+    else
+      to_a.my_each { |item| return true if item == regex }
     end
     result
   end
