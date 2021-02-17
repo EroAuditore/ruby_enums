@@ -1,5 +1,27 @@
 require './enumerable'
 
+#my inject
+
+# Sum some numbers
+puts (5..10).my_inject(:+)                             #=> 45
+ # Same using a block and my_inject
+puts (5..10).my_inject { |sum, n| sum + n }            #=> 45
+ # Multiply some numbers
+puts (5..10).my_inject(1, :*)                          #=> 151200
+ # Same using a block
+puts (5..10).my_inject(1) { |product, n| product * n } #=> 151200
+ # find the longest word
+ longest = %w{ cat sheep bear }.my_inject do |memo, word|
+   memo.length > word.length ? memo : word
+end
+puts longest                                        #=> "sheep"
+
+#My count
+ary = [1, 2, 4, 2]
+puts ary.count(2)            #=> 2
+puts ary.count               #=> 4
+puts ary.count{ |x| x%2==0 } #=> 3
+
 #My none
 
 puts %w{ant bear cat}.my_none? { |word| word.length == 5 } #=> true

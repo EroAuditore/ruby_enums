@@ -109,11 +109,11 @@ module Enumerable
     elsif num.nil? && !block_given?
       my_each { |_item| count += 1 }
     end
-    count
+    count.to_enum
   end
 
   def my_map(proc = nil)
-    return dup unless block_given? || proc
+    return to_enum(:my_map) unless block_given? || proc
 
     arr = []
     if proc
@@ -125,26 +125,28 @@ module Enumerable
   end
 
   def my_inject(num = nil, sym = nil)
+    raise LocalJumpError if num.nil? && sym.nil? && !block_given?
     # Codeblock given
     if block_given? && num.nil? && sym.nil?
-      # puts "block given"
+       #puts "block given"
       memo = num
       to_a.my_each { |item| memo = memo.nil? ? item : yield(memo, item) }
       memo
-    # symbol with array
+    
     elsif !num.nil? && num.is_a?(Symbol)
-      # puts "symbol"
-      sym = num
-      to_a.my_each { |item| memo = num.send(sym, item) }
+      # symbol with array
+      memo = 0
+      to_a.my_each { |item| memo = memo.send(num, item) }
       memo
-    # Symbol with number
+    
     elsif !num.nil? && sym.is_a?(Symbol)
-      # puts "number and symbol"
+      # Symbol with number
+      #puts "number and symbol"
       to_a.my_each { |item| memo = memo.nil? ? item.send(sym, num) : memo.send(sym, item) }
       memo
     # number and codeblock
     elsif !num.nil? && block_given? && sym.nil?
-      # puts "Num & block_given"
+      #puts "Num & block_given"
       to_a.my_each { |item| memo = memo.nil? ? yield(num, item) : yield(memo, item) }
       memo
 
