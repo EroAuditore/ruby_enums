@@ -1,6 +1,5 @@
 # rubocop: disable Metrics/ModuleLength
 # rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
-# rubocop: disable Style/For
 
 module Enumerable
   def my_each
@@ -94,7 +93,7 @@ module Enumerable
     elsif regex.is_a?(Class)
       to_a.my_each { |item| return false if item.is_a?(regex) }
     else
-     
+
       to_a.my_each { |item| return false if item }
     end
     result
@@ -126,27 +125,28 @@ module Enumerable
 
   def my_inject(num = nil, sym = nil)
     raise LocalJumpError if num.nil? && sym.nil? && !block_given?
+
     # Codeblock given
     if block_given? && num.nil? && sym.nil?
-       #puts "block given"
+      # puts "block given"
       memo = num
       to_a.my_each { |item| memo = memo.nil? ? item : yield(memo, item) }
       memo
-    
+
     elsif !num.nil? && num.is_a?(Symbol)
       # symbol with array
       memo = 0
       to_a.my_each { |item| memo = memo.send(num, item) }
       memo
-    
+
     elsif !num.nil? && sym.is_a?(Symbol)
       # Symbol with number
-      #puts "number and symbol"
+      # puts "number and symbol"
       to_a.my_each { |item| memo = memo.nil? ? item.send(sym, num) : memo.send(sym, item) }
       memo
     # number and codeblock
     elsif !num.nil? && block_given? && sym.nil?
-      #puts "Num & block_given"
+      # puts "Num & block_given"
       to_a.my_each { |item| memo = memo.nil? ? yield(num, item) : yield(memo, item) }
       memo
 
@@ -156,7 +156,6 @@ end
 
 # rubocop: enable Metrics/ModuleLength
 # rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
-# rubocop: enable Style/For
 def multiply_els(arr)
   arr.my_inject { |result, element| result * element }
 end
