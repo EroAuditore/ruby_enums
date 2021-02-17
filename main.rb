@@ -1,16 +1,45 @@
 require './enumerable'
 
+#My none
+
+puts %w{ant bear cat}.my_none? { |word| word.length == 5 } #=> true
+puts %w{ant bear cat}.my_none? { |word| word.length >= 4 } #=> false
+puts %w{ant bear cat}.my_none?(/d/)                        #=> true
+puts [1, 3.14, 42].my_none?(Float)                         #=> false
+puts [].my_none?                                           #=> true
+puts [nil].my_none?                                        #=> true
+puts [nil, false].my_none?                                 #=> true
+puts [nil, false, true].my_none?                           #=> false
+
+#My Any
+
+puts %w[ant bear cat].my_any? { |word| word.length >= 3 } #=> true
+puts %w[ant bear cat].my_any? { |word| word.length >= 4 } #=> true
+puts %w[ant bear cat].my_any?(/d/)                        #=> false
+puts [nil, true, 99].my_any?(Integer)                     #=> true
+puts [nil, true, 99].my_any?                              #=> true
+puts [].my_any?                                           #=> false
+
+# My all
+puts %w[ant bear cat].my_all? { |word| word.length >= 3 } #=> true
+puts %w[ant bear cat].my_all? { |word| word.length >= 4 } #=> false
+puts %w[ant bear cat].my_all?(/t/) #=> false
+puts [1, 2i, 3.14].my_all?(Numeric) #=> true
+puts [nil, true, 99].my_all? #=> false
+puts [].my_all? #=> true
+
 puts '** My Each **'
-m_each = [3, 2, 3, 4, 5].my_each { |num| puts num }
-puts m_each
+[3, 2, 3, 4, 5].my_each { |num| puts num }
+friends = %w[Sharon Leo Leila Brian Arun]
+friends.my_each { |friend| puts "Hello, #{friend}" }
 
 puts '** My Each index **'
-m_each_index = [3, 2, 3, 4, 5].my_each_with_index { |num, index| puts "Num #{num} with index #{index}" }
-puts m_each_index
+[3, 2, 3, 4, 5].my_each_with_index { |num, index| puts "Num #{num} with index #{index}" }
 
 puts '** My select **'
 puts m_select = %w[Sharon Leo Leila Brian Arun].my_select { |friend| friend != 'Brian' }
-puts m_select
+responses = { 'Sharon' => 'yes', 'Leo' => 'no', 'Leila' => 'no', 'Arun' => 'yes' }
+puts responses.my_select { |_person, response| response == 'yes' }
 
 puts '** My any **'
 

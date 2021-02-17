@@ -1,24 +1,29 @@
 # rubocop: disable Metrics/ModuleLength
 # rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+# rubocop: disable Style/For
 
 module Enumerable
   def my_each
-    return dup unless block_given?
+    return to_a.to_enum unless block_given?
 
-    (0..length - 1).each do |i|
+    0.upto(to_a.length - 1) do |i|
       yield to_a[i]
     end
+    self
   end
 
   def my_each_with_index
-    return dup unless block_given?
+    return to_enum(:my_each_with_index) unless block_given?
 
     (0..length - 1).each do |i|
       yield to_a[i], i
     end
+    self
   end
 
   def my_select
+    return to_enum(:my_select) unless block_given?
+
     new_arr = []
     my_each do |item|
       new_arr << item if yield(item)
@@ -35,13 +40,19 @@ module Enumerable
           break
         end
       end
-    elsif !regex.nil?
+    elsif !regex.nil? && regex.instance_of?(Regexp)
       my_each do |item|
         unless regex.match(item)
           result = false
           break
         end
       end
+    elsif !regex.nil? && (regex.is_a? Class)
+      to_a.my_each { |item| return false unless [item.class, item.class.superclass].include?(regex) }
+    elsif !block_given? && regex.nil?
+      to_a.my_each { |item| return false unless item }
+    else
+      result = uniq.length == 1
     end
     result
   end
@@ -55,13 +66,19 @@ module Enumerable
           break
         end
       end
-    elsif !regex.nil?
+    elsif !regex.nil? && regex.instance_of?(Regexp)
       my_each do |item|
         if regex.match(item)
           result = true
           break
         end
       end
+    elsif !regex.nil? && (regex.is_a? Class)
+      to_a.my_each { |item| return true if [item.class, item.class.superclass].include?(regex) }
+    elsif !block_given? && regex.nil?
+      to_a.my_each { |item| return true unless item }
+    elsif regex.is_a?(Class)
+      to_a.my_each { |item| return true if item.is_a?(regex) }
     end
     result
   end
@@ -70,8 +87,15 @@ module Enumerable
     result = true
     if block_given?
       my_each { |item| result = false if yield(item) }
-    elsif !regex.nil?
-      my_each { |item| result = false unless regex.match(item) }
+    elsif !block_given? && !regex.nil? && !regex.instance_of?(Regexp)
+      to_a.my_each { |item| return false if item }
+    elsif regex.is_a?(Regexp)
+      to_a.my_each { |item| return false if regex.match?(item) }
+    elsif regex.is_a?(Class)
+      to_a.my_each { |item| return false if item.is_a?(regex) }
+    else
+     
+      to_a.my_each { |item| return false if item }
     end
     result
   end
@@ -130,7 +154,7 @@ end
 
 # rubocop: enable Metrics/ModuleLength
 # rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
-
+# rubocop: enable Style/For
 def multiply_els(arr)
   arr.my_inject { |result, element| result * element }
 end
