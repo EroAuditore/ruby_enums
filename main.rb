@@ -9,9 +9,7 @@ puts '** My Each index **'
 [3, 2, 3, 4, 5].my_each_with_index { |num, index| puts "Num #{num} with index #{index}" }
 
 puts '** My select **'
-puts m_select = %w[Sharon Leo Leila Brian Arun].my_select { |friend| friend != 'Brian' }
-responses = { 'Sharon' => 'yes', 'Leo' => 'no', 'Leila' => 'no', 'Arun' => 'yes' }
-puts responses.my_select { |_person, response| response == 'yes' }
+puts(%w[Sharon Leo Leila Brian Arun].my_select { |friend| friend != 'Brian' })
 
 puts '** My any **'
 
