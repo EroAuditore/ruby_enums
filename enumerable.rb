@@ -145,8 +145,8 @@ module Enumerable
 
     elsif !num.nil? && num.is_a?(Symbol)
       # symbol with array
-      memo = 0
-      to_a.my_each { |item| memo = memo.send(num, item) }
+      memo = to_a[0]
+      (to_a.length - 1).times { |index| memo = memo.send(num, to_a[index + 1]) }
       memo
 
     elsif !num.nil? && sym.is_a?(Symbol)
