@@ -95,8 +95,10 @@ module Enumerable
     if block_given?
       my_each { |item| result = false if yield(item) }
     elsif !block_given? && !regex.nil? && !regex.instance_of?(Regexp)
-      to_a.my_each { |item| return false if item }
+
+      to_a.my_each { |item| return false if item == regex }
     elsif regex.is_a?(Regexp)
+
       to_a.my_each { |item| return false if regex.match?(item) }
     elsif regex.is_a?(Class)
       to_a.my_each { |item| return false if item.is_a?(regex) }

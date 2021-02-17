@@ -1,5 +1,4 @@
 require './enumerable'
-puts [nil, false, true, []].my_any?
 
 puts '** My Each **'
 [3, 2, 3, 4, 5].my_each { |num| puts num }
