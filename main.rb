@@ -1,6 +1,4 @@
 require './enumerable'
-puts (2..5).inject(:+)
-puts (2..5).my_inject(:+)
 
 puts '** My Each **'
 [3, 2, 3, 4, 5].my_each { |num| puts num }
